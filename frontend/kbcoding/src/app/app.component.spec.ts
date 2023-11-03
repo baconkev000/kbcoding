@@ -1,11 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { CourseGridComponent } from './components/course-grid/course-grid.component';
+import { CourseBoxHoverDirective } from './directives/course-box/course-box-hover.directive';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-xdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
+    imports: [RouterTestingModule, HttpClientTestingModule],
+    declarations: [AppComponent, NavComponent, HomePageComponent, CourseGridComponent, CourseBoxHoverDirective],
   }));
 
   it('should create the app', () => {
@@ -20,10 +25,4 @@ xdescribe('AppComponent', () => {
     expect(app.title).toEqual('kbcoding');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('kbcoding app is running!');
-  });
 });
