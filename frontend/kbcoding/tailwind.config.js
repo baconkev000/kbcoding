@@ -4,16 +4,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'dgrey': '#161616',
-        'mgrey': '#222222',
-        'bgrey': '#2D2D2D',
-        'lgrey': '#ffffff',
+        'd-grey': '#161616',
+        'md-grey': '#222222',
+        'base-grey': '#2D2D2D',
+        'l-grey': '#ffffff',
         'a-green': '#7DE3A8',
         'a-yellow': '#EED17A',
         'a-purple': '#DEB8F6',
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animated')
+  ],
 }
 
