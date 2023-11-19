@@ -1,4 +1,3 @@
-import { ApiService } from './api.service';
 // Http testing module and mocking controller
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
@@ -16,7 +15,7 @@ describe('ApiService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    testData = [{name: 'A', color:'red'},{name: 'B', color:'blue'}];
+    testData = [{id: 1, name: 'A', color:'red'},{id: 2, name: 'B', color:'blue'}];
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });

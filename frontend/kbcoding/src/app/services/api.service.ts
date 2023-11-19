@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { CourseType } from '../types/course-type';
+import { Course } from '../types/course';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,14 @@ export class ApiService {
     return this.http.get<CourseType[]>(url).pipe(
       tap(_ => this.log("fetched course types")),
       catchError(this.handleError<CourseType[]>('getCourseTypes', []))
+    )
+  }
+
+  getCourses(): Observable<Course[]> {
+    let url: string = this.base_url + 'courses';
+    return this.http.get<Course[]>(url).pipe(
+      tap(_ => this.log("fetched courses")),
+      catchError(this.handleError<Course[]>('getCourses', []))
     )
   }
 

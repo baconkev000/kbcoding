@@ -1,15 +1,12 @@
-<div class="w-full h-16 flex justify-center text-xl">
+<div class="w-full h-16 flex justify-center text-xl border-b-4 border-a-yellow">
     <div class="w-5/6 flex justify-between px-6">
         <div class="flex items-center">
-            KBCoding
+            <a [routerLink]="'/'">KBCoding</a>
         </div>
         <div class="flex justify-center flex-col">
             <ul class="flex animate-fade-down ease-in-out duration-200">
-                <li class="px-4"><a routerLink="#">Courses</a></li>
-                <li class="px-4"><a routerLink="#">Add a Course</a></li>
-                <li class="px-4"><a routerLink="#">Login</a></li>
+                <li class="px-4 hover:text-l-grey" *ngFor="let link of links"><a [routerLink]="link.url">{{link.name}}</a></li>
             </ul>
-            
         </div>
     </div>
 </div>

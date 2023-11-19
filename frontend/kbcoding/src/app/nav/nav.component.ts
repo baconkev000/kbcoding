@@ -6,5 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-
+  links = [
+    {
+      name: 'Courses',
+      url: 'courses',
+    },
+    {
+      name: 'Add a Course',
+      url: 'add-course',
+    },
+    {
+      name: 'Login',
+      url: '#',
+    }
+  ]
 }
