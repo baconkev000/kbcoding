@@ -1,6 +1,0 @@
-xdescribe('CourseGridComponent', () => {
-  beforeEach(() => {
-  });
-
-
-});

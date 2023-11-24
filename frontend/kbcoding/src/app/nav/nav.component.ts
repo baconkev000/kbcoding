@@ -8,12 +8,12 @@ import { Component } from '@angular/core';
 export class NavComponent {
   links = [
     {
-      name: 'Courses',
-      url: 'courses',
+      name: 'Projects',
+      url: 'projects',
     },
     {
-      name: 'Add a Course',
-      url: 'add-course',
+      name: 'Add a Project',
+      url: 'add-project',
     },
     {
       name: 'Login',

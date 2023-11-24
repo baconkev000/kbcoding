@@ -1,15 +1,15 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appCourseBoxHover]'
+  selector: '[appProjectBoxHover]'
 })
-export class CourseBoxHoverDirective {
-  @Input() appCourseBoxHover: string = 'white'
+export class ProjectBoxHoverDirective {
+  @Input() appProjectBoxHover: string = 'white'
 
   constructor(private el: ElementRef) { }
   
   @HostListener('mouseenter') onMouseEnter() {
-    this.changeBackground(this.appCourseBoxHover)
+    this.changeBackground(this.appProjectBoxHover)
   }
 
   @HostListener('mouseleave') onMouseLeave() {

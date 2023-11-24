@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CourseBoxHoverDirective } from './course-box-hover.directive';
+import { ProjectBoxHoverDirective } from './project-box-hover.directive';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 @Component({
   template: `
-  <h2 [appCourseBoxHover]="'red'" >Something Red</h2>
+  <h2 [appProjectBoxHover]="'red'" >Something Red</h2>
   `
 })
 class TestComponent { }
 
-describe('CourseBoxHoverDirective', () => {
+describe('ProjectBoxHoverDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let des: DebugElement;
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      declarations: [CourseBoxHoverDirective, TestComponent]
+      declarations: [ProjectBoxHoverDirective, TestComponent]
     }).createComponent(TestComponent);
 
     fixture.detectChanges();

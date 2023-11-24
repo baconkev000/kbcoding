@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { CourseType } from '../types/course-type';
-import { Course } from '../types/course';
+import { ProjectType } from '../types/project-type';
+import { Project } from '../types/project';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +12,19 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   private base_url: string = "api/v1/"
 
-  getCourseTypes(): Observable<CourseType[]> {
-    let url: string = this.base_url + 'course_types';
-    return this.http.get<CourseType[]>(url).pipe(
-      tap(_ => this.log("fetched course types")),
-      catchError(this.handleError<CourseType[]>('getCourseTypes', []))
+  getprojectTypes(): Observable<ProjectType[]> {
+    let url: string = this.base_url + 'project_types';
+    return this.http.get<ProjectType[]>(url).pipe(
+      tap(_ => this.log("fetched project types")),
+      catchError(this.handleError<ProjectType[]>('getprojectTypes', []))
     )
   }
 
-  getCourses(): Observable<Course[]> {
-    let url: string = this.base_url + 'courses';
-    return this.http.get<Course[]>(url).pipe(
-      tap(_ => this.log("fetched courses")),
-      catchError(this.handleError<Course[]>('getCourses', []))
+  getProjects(): Observable<Project[]> {
+    let url: string = this.base_url + 'projects';
+    return this.http.get<Project[]>(url).pipe(
+      tap(_ => this.log("fetched projects")),
+      catchError(this.handleError<Project[]>('getProjects', []))
     )
   }
 

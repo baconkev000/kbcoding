@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CourseType } from '../types/course-type';
+import { ProjectType } from '../types/project-type';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -8,19 +8,17 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-  boxes: CourseType[] = []
-  isFetching: boolean = false;
+  boxes: ProjectType[] = []
   constructor(private apiService: ApiService){}
 
   ngOnInit(){
-    this.getCourseTypes();
+    this.getprojectTypes();
   }
 
-  getCourseTypes(){
-    this.isFetching = true;
-    this.apiService.getCourseTypes().subscribe((courseTypes: CourseType[]) => {
-      this.boxes = courseTypes;
+  getprojectTypes(){
+    this.apiService.getprojectTypes().subscribe((projectTypes: ProjectType[]) => {
+      this.boxes = projectTypes;
+      this.boxes.sort((a: ProjectType, b: ProjectType) => a.id - b.id)
     })
-    this.isFetching = false;
   }
 }

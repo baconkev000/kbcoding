@@ -1,9 +1,9 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appCourseTypeHover]'
+  selector: '[appProjectTypeHover]'
 })
-export class CourseTypeHoverDirective {
+export class ProjectTypeHoverDirective {
   constructor(private el: ElementRef) { }
   
   @HostListener('mouseenter') onMouseEnter() {

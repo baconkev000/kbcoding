@@ -4,12 +4,12 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 // Other imports
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { CourseType } from '../types/course-type';
+import { ProjectType } from '../types/project-type';
 
 describe('ApiService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController; 
-  let testData: CourseType[];
+  let testData: ProjectType[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -21,15 +21,15 @@ describe('ApiService', () => {
   });
   
 
-  it('should return expected course types (HttpClient called once)', () => {
+  it('should return expected project types (HttpClient called once)', () => {
     // make http get request
-    httpClient.get<CourseType[]>('course_types')
-    .subscribe(courseTypes =>
+    httpClient.get<ProjectType[]>('project_types')
+    .subscribe(projectTypes =>
       // when observable resolves, result should match test data
-      expect(courseTypes).toEqual(testData)
+      expect(projectTypes).toEqual(testData)
     );
     
-      const req = httpTestingController.expectOne('course_types');
+      const req = httpTestingController.expectOne('project_types');
 
       // assert that the request is equal to get
       expect(req.request.method).toEqual('GET');
@@ -45,7 +45,7 @@ describe('ApiService', () => {
   it('can test for error', () => {
     const errorMessage = 'deliberate 404 error';
 
-    httpClient.get<CourseType[]>('course_types')
+    httpClient.get<ProjectType[]>('project_types')
     .subscribe({
       next: () => fail('should have failed with 404'),
       error: (error: HttpErrorResponse) => {
@@ -54,7 +54,7 @@ describe('ApiService', () => {
       },
     });
 
-    const req = httpTestingController.expectOne('course_types');
+    const req = httpTestingController.expectOne('project_types');
 
     // Respond with mock error
     req.flush(errorMessage, {status: 404, statusText: 'Not Found'})

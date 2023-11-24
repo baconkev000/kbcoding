@@ -1,12 +1,12 @@
-import { CourseType } from "./course-type"
+import { ProjectType } from "./project-type"
 import { Section } from "./section"
 
-export interface Course {
+export interface Project {
     id: number,
     name: string,
     description: string,
     completed: boolean,
-    course_type: CourseType,
+    project_type: ProjectType,
     sections?: Section[],
 }
 

@@ -6,24 +6,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { CourseGridComponent } from './components/course-grid/course-grid.component';
-import { CourseBoxHoverDirective } from './directives/course-box/course-box-hover.directive';
-import { CoursesPageComponent } from './courses-page/courses-page.component';
-import { CourseTypeHoverDirective } from './directives/courese-type-hover/course-type-hover.directive';
+import { ProjectGridComponent } from './components/project-grid/project-grid.component';
+import { ProjectBoxHoverDirective } from './directives/project-box/project-box-hover.directive';
+import { ProjectsPageComponent } from './projects-page/projects-page.component';
+import { ProjectTypeHoverDirective } from './directives/project-type-hover/project-type-hover.directive';
+import { AddProjectPageComponent } from './add-page-page/add-project-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomePageComponent,
-    CourseGridComponent,
-    CourseBoxHoverDirective,
-    CoursesPageComponent,
-    CourseTypeHoverDirective,
+    ProjectGridComponent,
+    ProjectBoxHoverDirective,
+    ProjectsPageComponent,
+    ProjectTypeHoverDirective,
+    AddProjectPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
