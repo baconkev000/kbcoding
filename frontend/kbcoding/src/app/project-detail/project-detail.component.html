@@ -1,0 +1,25 @@
+<div class="w-full flex justify-center py-8">
+    <div class="w-5/6">
+        <div class="breadcrumb">
+        <a [routerLink]="'/projects'">< Projects</a>
+        </div>
+        <div class="grid grid-cols-3 h-96 gap-4">
+            <div class="col-span-2 bg-l-grey">
+                
+            </div>
+            <div class="bg-md-grey h-full"></div>
+        </div>
+        <div class="grid grid-cols-3 h-96 gap-x-4 py-8">
+            <div class="col-span-2">
+                <div class="text-2xl py-4 font-semibold">{{project.title}}</div>
+                <div class="bg-l-grey p-8">
+                    <div class="py-4 text-xl font-semibold">OverView</div>
+                    {{project.overview}}
+                    <p *ngIf="project.overview === null">
+                        There is no overivew for this project.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

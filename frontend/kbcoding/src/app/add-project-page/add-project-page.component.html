@@ -3,14 +3,17 @@
         <h1 class="text-2xl pb-4">Add A Project</h1>
         <div class="w-full bg-grey-light h-full">
             <h1 class="text-2xl pb-4">Project Info</h1>
-            <form class="grid grid-cols-12 gap-4 bg-md-grey" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-                <div class="col-span-8 p-10">
+            <form class="grid grid-cols-12 gap-4 bg-md-grey py-12 text-base" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                <div class="col-span-8 px-10">
                     <div  class="flex flex-col gap-y-2" [ngClass]="{'hidden': !showProjectInfo}">
                             <label for="project-name">Project Name: </label>
                             <input id="project-name" type="text" formControlName="projectName">
                             <br />
                             <label for="project-description">Project Description: </label>
                             <input id="project-description" type="text" formControlName="projectDescription">
+                            <br />
+                            <label for="project-overview">Project Overview: </label>
+                            <input id="project-overview" type="text" formControlName="projectOverview">
                     </div>
                     <div id="sectionInfo" class="flex flex-col gap-y-2" [ngClass]="{'hidden': !showSectionInfo}"formArrayName="sections">                                            
                         <div class="flex flex-col gap-y-2 bg-l-grey p-4" *ngFor="let section of sections.controls; let i=index" [formGroupName]="i">
@@ -36,7 +39,9 @@
                    <div class="py-2 hover:bg-l-grey cursor-pointer" (click)="toggleInfoToShow('project')">Project Info</div>
                    <div class="py-2 hover:bg-l-grey cursor-pointer" (click)="toggleInfoToShow('section')">Section Info</div>
                 </div>
-                <button type="submit">Submit</button>
+                <div class="col-span-8 text-center">
+                    <button class="text-xl mt-12" type="submit">Submit</button>
+                </div>
             </form>
         </div>
     </div>

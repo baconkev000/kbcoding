@@ -24,7 +24,7 @@ export class ProjectGridComponent implements OnInit{
           this.currentType = parseInt(params['currentType']); 
         }
       } 
-    ) 
+    )
     this.getProjects();
     this.getprojectTypes();
   }

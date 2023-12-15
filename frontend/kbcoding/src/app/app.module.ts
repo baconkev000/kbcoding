@@ -10,9 +10,9 @@ import { ProjectGridComponent } from './components/project-grid/project-grid.com
 import { ProjectBoxHoverDirective } from './directives/project-box/project-box-hover.directive';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectTypeHoverDirective } from './directives/project-type-hover/project-type-hover.directive';
-import { AddProjectPageComponent } from './add-page-page/add-project-page.component';
+import { AddProjectPageComponent } from './add-project-page/add-project-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProjectPageComponent } from './project-page/project-page.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +23,7 @@ import { ProjectPageComponent } from './project-page/project-page.component';
     ProjectsPageComponent,
     ProjectTypeHoverDirective,
     AddProjectPageComponent,
-    ProjectPageComponent,
+    ProjectDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,9 +16,9 @@
     *ngFor="let box of filterdBoxes"
     [ngClass]="{'bg-color': true}"
     [appProjectBoxHover]="box.project_type.color"
-    >
+    [routerLink]="['/projects', box.id]">
         <div ngClass="text-xl">
-             {{box.name}}
+             {{box.title}}
         </div>
     </a>
 </div>

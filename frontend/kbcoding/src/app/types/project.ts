@@ -3,7 +3,8 @@ import { Section } from "./section"
 
 export interface Project {
     id: number,
-    name: string,
+    title: string,
+    overview: string,
     description: string,
     completed: boolean,
     project_type: ProjectType,

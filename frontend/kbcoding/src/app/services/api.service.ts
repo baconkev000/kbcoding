@@ -28,6 +28,14 @@ export class ApiService {
     )
   }
 
+  getProjectById(id:number): Observable<Project> {
+    let url: string = this.base_url + 'projects/' + id;
+    return this.http.get<Project>(url).pipe(
+      tap(_ => this.log("fetched project by id")),
+      catchError(this.handleError<Project>('getProject', ))
+    )
+  }
+
   /**
    * Handles Http operation that failed.
    * 

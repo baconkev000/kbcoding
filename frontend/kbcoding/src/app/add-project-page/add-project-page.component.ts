@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormArray, Validators, Form, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, Validators,} from '@angular/forms';
 
 @Component({
   selector: 'app-add-project-page',
@@ -29,6 +29,7 @@ export class AddProjectPageComponent {
   projectForm = this.fb.group({
     projectName: ['', Validators.required],
     projectDescription: ['', Validators.required],
+    projectOverview: ['', Validators.required],
     sections: this.fb.array([
       this.initSectionForm()
     ])
