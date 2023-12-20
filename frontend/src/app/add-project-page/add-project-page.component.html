@@ -1,0 +1,62 @@
+<div class="flex justify-center ">
+    <div class="w-5/6 py-6">
+        <h1 class="text-2xl pb-4">Add A Project</h1>
+        <div class="w-full bg-grey-light">
+            <form class="grid md:grid-cols-12 grid-cols-1 gap-4 bg-md-grey py-4 text-base" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                <div class="md:col-span-8 col-span-12 px-10 md:row-start-1 row-start-2">
+                    <div  class="flex flex-col gap-y-2 bg-l-grey p-4" [ngClass]="{'hidden': !showProjectInfo}">
+                            <label for="project-name">Project Name: </label>
+                            <input id="project-name" type="text" formControlName="projectName">
+                            <p class="text-rose-400" *ngIf="projectForm.get('projectName')!.hasError('required') &&
+                            (projectForm.get('projectName')!.touched)">
+                                Project Name is required
+                                </p>
+                            <br />
+                            <label for="project-overview">Project Type: </label>
+                            <select class="bg-lighter-grey" formControlName="projectType">
+                                <option  *ngFor="let type of projectTypes" [ngValue]="type.id">
+                                  {{ type.name }}
+                                </option>
+                            </select>
+                            <br />
+                            <label for="project-description">Project Description: </label>
+                            <textarea id="project-description" type="text" formControlName="projectDescription"></textarea>
+                            <p class="text-rose-400" *ngIf="projectForm.get('projectDescription')!.hasError('required') &&
+                            (projectForm.get('projectDescription')!.touched)">
+                                Project Description is required
+                                </p>
+                            <br />
+                            <label for="project-overview">Project Overview: </label>
+                            <textarea id="project-overview" type="text" formControlName="projectOverview"></textarea>
+                            <p class="text-rose-400" *ngIf="projectForm.get('projectOverview')!.hasError('required') &&
+                            (projectForm.get('projectOverview')!.touched)">
+                                Project Overview is required
+                                </p>
+
+                    </div>
+                    <div id="mediaInfo" class="flex flex-col gap-y-2" [ngClass]="{'hidden': !showMediaInfo}"formArrayName="media">                                            
+                        <div class="flex flex-col gap-y-2 bg-l-grey p-4" *ngFor="let item of media.controls; let i=index" [formGroupName]="i">
+                            <label for="media-name-{{i}}" >Media Name: </label>
+                            <input id="media-name-{{i}}" type="text" formControlName="mediaName">
+                            <br />
+                            <label for="media-{{i}}" >Media: </label>
+                            <input class="!bg-transparent border-2 border-lighter-grey !h-auto py-2" id="media-{{i}}" accept="image/*" type="file" formControlName="media" >
+                            <button type="button" (click)="removeMedia(i)">- Remove Media</button>
+
+                        </div>
+                        <button type="button" (click)="addMedia()">+ Add Media</button>
+
+                    </div>
+                </div>
+                
+                <div class="md:col-span-4 col-span-12 text-2xl text-center md:border-l-2 md:border-b-0 border-b-2 border-white flex md:flex-col flex-row md:gap-x-2 gap-y-4 gap-x-12 md:justify-start justify-center">
+                   <div class="hover:bg-l-grey cursor-pointer md:p-2 p-4" (click)="toggleInfoToShow('project')">Project Info</div>
+                   <div class="hover:bg-l-grey cursor-pointer md:p-2 p-4" (click)="toggleInfoToShow('media')">Media Info</div>
+                </div>
+                <div class="col-span-8 text-center">
+                    <button class="text-xl mt-12" type="submit" [formGroup]="projectForm" (ngSubmit)="onSubmit()" >Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

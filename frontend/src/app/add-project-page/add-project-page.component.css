@@ -1,0 +1,18 @@
+input{
+    background-color: #616161;
+    height: 40px;
+    padding-left: 5px;
+}
+textarea{
+    background-color: #616161;
+    height: 80px;
+    padding-left: 5px;
+}
+
+select{
+    height: 40px;
+}
+
+label{
+    font-size: 18px;
+}
