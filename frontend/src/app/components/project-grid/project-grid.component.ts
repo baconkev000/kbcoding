@@ -10,7 +10,8 @@ import { ProjectType } from 'src/app/types/project-type';
   styleUrls: ['./project-grid.component.css']
 })
 export class ProjectGridComponent implements OnInit{
-  currentType: number = 1;
+  currentTypeID: number = 1;
+  currentType!: ProjectType;
   projectTypes: ProjectType[] = [];
   boxes: Project[] = [];
   filterdBoxes: Project[] = [];
@@ -21,7 +22,7 @@ export class ProjectGridComponent implements OnInit{
     this.route.queryParams.subscribe( 
       params => { 
         if(params['currentType'] !== undefined){
-          this.currentType = parseInt(params['currentType']); 
+          this.currentTypeID = parseInt(params['currentType']); 
         }
       } 
     ) 
@@ -32,18 +33,24 @@ export class ProjectGridComponent implements OnInit{
   getprojectTypes(){
     this.apiService.getprojectTypes().subscribe((projectTypes: ProjectType[]) => {
       this.projectTypes = projectTypes;
-      this.projectTypes.sort((a: ProjectType, b: ProjectType) => a.id - b.id)
+      this.projectTypes.sort((a: ProjectType, b: ProjectType) => a.id - b.id);
+      this.currentType = this.getPType(this.currentTypeID);
     })
   }
   getProjects(){
     this.apiService.getProjects().subscribe((projects: Project[]) => {
       this.boxes = projects;
-      this.filterdBoxes = projects.filter((project: Project) => project.project_type.id === this.currentType)
+      this.filterdBoxes = projects.filter((project: Project) => project.project_type === this.currentTypeID)
     })
   }
 
+  getPType(id: number){
+    const tempType = this.projectTypes.find((pType: ProjectType) => pType.id == id);
+    return tempType !== undefined ? tempType : this.projectTypes[0];
+  }
+
   updateFilteredBoxes(id: number){
-    this.currentType = id;
-    this.filterdBoxes = this.boxes.filter((project: Project) => project.project_type.id === id)
+    this.currentType = this.getPType(id);
+    this.filterdBoxes = this.boxes.filter((project: Project) => project.project_type === id);
   }
 }

@@ -5,19 +5,30 @@ import { catchError, tap } from 'rxjs/operators';
 import { ProjectType } from '../types/project-type';
 import { Project } from '../types/project';
 import { APIProject } from '../types/api-project';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   constructor(private http: HttpClient) { }
-  private base_url: string = "api/v1/"
+  private base_url: string = "http://localhost:8000/"
+  
+  //environment.apiUrl;
 
   getprojectTypes(): Observable<ProjectType[]> {
     let url: string = this.base_url + 'project_types';
     return this.http.get<ProjectType[]>(url).pipe(
       tap(_ => this.log("fetched project types")),
       catchError(this.handleError<ProjectType[]>('getprojectTypes', []))
+    )
+  }
+
+  getProjectTypeById(id:number): Observable<ProjectType> {
+    let url: string = this.base_url + 'project_types/' + id;
+    return this.http.get<ProjectType>(url).pipe(
+      tap(_ => this.log("fetched project by id")),
+      catchError(this.handleError<ProjectType>('getProjectType', ))
     )
   }
 
@@ -38,13 +49,11 @@ export class ApiService {
   }
 
   postProject(project:APIProject): Observable<Project> {
-    console.log("service valid", project)
     let url: string = this.base_url + 'projects/';
-    console.log("service valid", url)
-    return this.http.post<Project>(url, project).pipe(
-      tap(_ => this.log("fetched project by id")),
-      catchError(this.handleError<Project>('getProject', ))
-    )
+    return this.http.post<Project>(url, project)
+    .pipe(
+      
+    );
   }
 
   /**

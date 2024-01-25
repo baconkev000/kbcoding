@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,8 @@ import { ProjectTypeHoverDirective } from './directives/project-type-hover/proje
 import { AddProjectPageComponent } from './add-project-page/add-project-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { httpInterceptorProviders } from './http-interceptors';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,8 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

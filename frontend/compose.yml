@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      target: builder
+    ports:
+      - 4200:4200
+    volumes:
+      - ./angular:/app
+      - /project/node_modules
+    networks:
+      - backend-net
+networks:
+  backend-net:
+    driver: bridge

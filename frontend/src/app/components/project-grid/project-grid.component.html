@@ -2,8 +2,8 @@
     <div 
     class="text-2xl text-center border-b-4 pb-2 cursor-pointer ease-in-out duration-200"
     *ngFor="let type of projectTypes"
-    [ngStyle]="{'border-color': type.color}"
-    [ngClass]="{'border-hidden': currentType !== type.id, 'active': currentType == type.id}"
+    [ngStyle]="{'border-color': type.color ? type.color : ''}"
+    [ngClass]="{'border-hidden': currentType.id !== type.id, 'active': currentType.id == type.id}"
     (click)="updateFilteredBoxes(type.id)"
     appProjectTypeHover>
         {{type.name}}
@@ -12,10 +12,10 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <a 
     class="h-52 border-4 flex justify-center items-center hover:cursor-pointer animate-fade-down ease-in-out duration-100 hover:text-d-grey ease-in-out duration-200" 
-    [ngStyle]="{'border-color': box.project_type.color}" 
+    [ngStyle]="{'border-color': currentType.color ? currentType.color : ''}" 
     *ngFor="let box of filterdBoxes"
     [ngClass]="{'bg-color': true}"
-    [appProjectBoxHover]="box.project_type.color"
+    [appProjectBoxHover]="currentType.color ? currentType.color : ''"
     [routerLink]="['/projects', box.id]">
         <div ngClass="text-xl">
              {{box.title}}

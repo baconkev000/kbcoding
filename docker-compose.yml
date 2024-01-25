@@ -1,0 +1,5 @@
+version: '3.7'
+
+include:
+  - ./frontend/compose.yml
+  - ./backend/local.yml
