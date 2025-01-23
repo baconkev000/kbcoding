@@ -39,9 +39,3 @@ These instructions will get you through launching phase of this project.
 
 - Frontend port at [localhost:8080](http://localhost:8080)
 - Backend port at [localhost:8000](http://localhost:8000/api/)
-
-### Available API Urls:
-  - Players - [http://localhost:8000/api/players](http://localhost:8000/api/players)
-  - Player by Name - [http://localhost:8000/api/players/{name}](http://localhost:8000/api/players)
-  - Clubs - [http://localhost:8000/api/clubs](http://localhost:8000/api/clubs)
-  - Attributes - [http://localhost:8000/api/attributes](http://localhost:8000/api/attributes)
