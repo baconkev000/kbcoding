@@ -1,4 +1,4 @@
-# U of U Coding Challenge
+# KBCoding
 
 License: MIT
 
