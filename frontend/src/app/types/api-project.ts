@@ -5,5 +5,5 @@ export interface APIProject {
     overview: string,
     description: string,
     project_type: number,
-    media: File[]
+    media: ProjectMedia[]
 }

@@ -34,7 +34,7 @@ export class AddProjectPageComponent implements OnInit{
   initMediaForm(){
     return this.fb.group({
       mediaName: ['', [Validators.required, Validators.minLength(4)]],
-      media: [null, Validators.required]
+      media: [null as File | null, Validators.required]
     })
   }
 
@@ -72,12 +72,12 @@ export class AddProjectPageComponent implements OnInit{
     }
   }
 
-  onFileSelected(event: Event) {
+  onFileSelected(event: Event, index: number) {
     const input = event.target as HTMLInputElement;
-    if (input.files) {
-        this.projectForm.patchValue({ media: Array.from(input.files) });
+    if (input.files?.length) {
+      this.media.at(index).patchValue({ media: input.files[0] });
     }
-}
+  }
 
   
   onSubmit() {

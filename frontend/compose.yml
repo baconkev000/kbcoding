@@ -6,7 +6,7 @@ services:
     ports:
       - 4200:4200
     volumes:
-      - ./angular:/app
+      - .:/project
       - /project/node_modules
     networks:
       - backend-net

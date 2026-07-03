@@ -62,17 +62,17 @@ export class ApiService {
     formData.append("title", project.title);
     formData.append("overview", project.overview);
     formData.append("description", project.description);
-    formData.append("project_type", project.project_type);
+    formData.append("project_type", String(project.project_type));
 
     // Append media files
     if (project.media) {
         project.media.forEach((media, index) => {
             formData.append(`media[${index}][name]`, media.name);
-            formData.append(`media[${index}][url]`, media.url); // Append actual file
+            formData.append(`media[${index}][url]`, media.url, media.name);
         });
     }
 
-    return this.http.post<Project>(url, formData, httpOptions).pipe(
+    return this.http.post<Project>(url, formData).pipe(
         tap(response => console.log("Server response:", response)),  // If request succeeds
         catchError(error => {
             console.error("Request failed:", error);  // If request fails
