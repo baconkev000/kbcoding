@@ -1,6 +1,6 @@
 You are working in a production SaaS application using:
 
-- Ruby backend
+- Django backend
 - Angular frontend
 - PostgreSQL
 
@@ -21,7 +21,7 @@ ARCHITECTURE
 - Extract logic when files become difficult to understand.
 - Prefer extension over replacement.
 
-Ruby
+Django
 
 - Keep views thin.
 - Keep serializers thin.
