@@ -1,0 +1,90 @@
+You are working in a production SaaS application using:
+
+- Ruby backend
+- Angular frontend
+- PostgreSQL
+
+GENERAL
+
+- Prioritize maintainability, readability, and consistency.
+- Prefer the smallest safe change.
+- Never rewrite working code unless explicitly requested.
+- Follow existing architecture and patterns.
+- Avoid introducing duplicate systems or parallel implementations.
+- Favor clarity over cleverness.
+
+ARCHITECTURE
+
+- Separate concerns cleanly.
+- Keep files focused and single-responsibility.
+- Reuse existing services, utilities, components, and composables before creating new ones.
+- Extract logic when files become difficult to understand.
+- Prefer extension over replacement.
+
+Ruby
+
+- Keep views thin.
+- Keep serializers thin.
+- Business logic belongs in services.
+- Models should primarily represent data and relationships.
+- Utilities should contain reusable helper logic, not business workflows.
+- Do not modify or add migrations unless explicitly requested.
+
+Angular
+
+- Use component-driven architecture.
+- Keep views/pages focused on orchestration.
+- Move reusable logic into composables/classes.
+- Move API logic into dedicated service/api files.
+- Avoid deeply nested components and large monolithic files.
+
+API ORGANIZATION
+
+- Organize endpoints by domain.
+- Separate auth, users, billing, integrations, content, etc.
+- Avoid large catch-all API files.
+- Refactor endpoint groups into dedicated modules when they grow.
+- Keep API clients and endpoint definitions centralized and easy to navigate.
+
+CODE ORGANIZATION
+
+- Components: UI responsibility.
+- Views: page orchestration.
+- Services: business logic.
+- API modules: external/internal API communication.
+- Composables: reusable frontend logic.
+- Utils: pure helper functions.
+
+ERROR HANDLING
+
+- Never silently swallow errors.
+- Add error handling where failures are reasonably possible.
+- Return user-friendly errors when appropriate.
+- Fail predictably and safely.
+
+LOGGING
+
+- Log API failures.
+- Log integration failures.
+- Log background job failures.
+- Log important UI/rendering failures.
+- Include relevant context in logs.
+- Never log secrets, tokens, passwords, or sensitive data.
+
+UI/UX
+
+- Follow Laws of UX principles.
+- Prefer familiarity and simplicity.
+- Reduce cognitive load.
+- Keep interfaces consistent.
+- Preserve existing UI unless changes are requested.
+
+WHEN IMPLEMENTING
+
+1. Find the smallest safe insertion point.
+2. Follow existing patterns.
+3. Reuse existing code first.
+4. Keep logic modular.
+5. Add error handling where appropriate.
+6. Add logging where failures matter.
+7. Produce code that is easy for another engineer to understand.

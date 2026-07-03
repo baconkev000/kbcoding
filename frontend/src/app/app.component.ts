@@ -11,7 +11,7 @@ import { OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'kbcoding';
   constructor(){
-    console.log("prod?? ", environment.apiUrl);
+    console.log("env url", environment.apiUrl);
   }
   
   ngOnInit(): void {

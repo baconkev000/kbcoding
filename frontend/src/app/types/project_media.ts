@@ -1,5 +1,5 @@
 export interface ProjectMedia {
-    id: number,
+    id?: number,
     name: string,
-    url: string,
+    url: File,
 }

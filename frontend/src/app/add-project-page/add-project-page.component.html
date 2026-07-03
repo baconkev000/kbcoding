@@ -40,7 +40,7 @@
                             <input id="media-name-{{i}}" type="text" formControlName="mediaName">
                             <br />
                             <label for="media-{{i}}" >Media: </label>
-                            <input class="!bg-transparent border-2 border-lighter-grey !h-auto py-2" id="media-{{i}}" accept="image/*" type="file" formControlName="media" >
+                            <input class="!bg-transparent border-2 border-lighter-grey !h-auto py-2" id="media-{{i}}" accept="image/*" type="file" formControlName="media" (change)="onFileSelected($event)">
                             <button type="button" (click)="removeMedia(i)">- Remove Media</button>
 
                         </div>
