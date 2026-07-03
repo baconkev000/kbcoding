@@ -5,6 +5,8 @@ services:
       target: builder
     ports:
       - 4200:4200
+    environment:
+      - PROXY_API_TARGET=http://django:8000
     volumes:
       - .:/project
       - /project/node_modules
