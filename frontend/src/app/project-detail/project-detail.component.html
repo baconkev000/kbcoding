@@ -1,7 +1,7 @@
 <div class="w-full flex justify-center py-8 flex-row">
     <div class="w-5/6" *ngIf="project">
         <div class="breadcrumb">
-            <a [routerLink]="'/projects'">&lt; Portfolio</a>
+            <a [routerLink]="['/projects']" [queryParams]="portfolioQueryParams">&lt; Portfolio</a>
         </div>
 
         <div *ngIf="isWebGame" class="pt-8">

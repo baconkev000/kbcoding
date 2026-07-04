@@ -11,10 +11,32 @@
       <div class="about-summary">
         <div class="add-indent code-line">
           <p class="ap-1">
-            Hi, my name is Kevin Bacon and I'm a full stack software engineer based in
+            Hi, my name is Kevin Bacon and I'm a Senior Full Stack Software Engineer based in
             <app-member-access [members]="['Salt Lake City Utah']"></app-member-access>.
-            I regularly create and work on projects where I develop and implement scalable, data driven, high qualty products/features.
+            I enjoy building products from idea → architecture → deployment, creating scalable web and mobile applications that solve real problems for real people. Whether I'm leading development on a startup, designing APIs, or refining user experiences, I'm driven by the challenge of turning complex ideas into simple, polished software.
           </p>
+        </div>
+
+        <div class="experience-block">
+          <p>
+            <span class="secondary-accent-color">experience </span>=<span class="accent-color"> &#123;</span>
+          </p>
+          <div class="add-indent code-line">
+            <p>
+              <span class="secondary-accent-color">years: </span>
+              <span class="tertiary-accent-color">{{ experience.years }}</span><span class="dot">,</span>
+            </p>
+            <p>
+              <span class="secondary-accent-color">specialties: </span><span class="accent-color">[</span>
+            </p>
+            <div class="add-indent code-line">
+              <p *ngFor="let specialty of experience.specialties; let last = last">
+                <span class="quinary-accent-color">&quot;{{ specialty }}&quot;</span><span *ngIf="!last" class="dot">,</span>
+              </p>
+            </div>
+            <p><span class="accent-color">]</span></p>
+          </div>
+          <p><span class="accent-color">&#125;</span></p>
         </div>
 
         <p>
@@ -27,16 +49,18 @@
 
         <div class="add-indent code-line">
           <p class="ap-2">
-            When I'm not working, I am likely executing one of the
-            <span class="secondary-accent-color"> hobbies</span> listed above.
+            When I'm away from the keyboard, you'll usually find me somewhere in that list. I've always believed that creativity isn't limited to software—it shows up in art, music, design, business, and just about anything worth building.
           </p>
           <p class="ap-3">
             <span class="quaternary-accent-color">
-              # I enjoy excersizing my creative side in various ways and I am always wanting to gain skills in anything new. From creating art and animations to producing music, there is no limit to what I belive I can do. I love learning and trying new things. I have a strong drive for perfecting my craft and getting better at everything I do, especially programming.
+              # I love solving difficult problems.
             </span>
           </p>
+          <p class="ap-4">
+            Programming has become my favorite medium because it combines creativity with logic. There's something incredibly satisfying about taking an abstract idea and transforming it into a product that people can actually use. That same mindset carries into everything I build: continuous learning, thoughtful design, attention to detail, and an obsession with improving a little every day.
+          </p>
           <p>
-            This site is a small representation of who I am and what I enjoy doing. I hope you enjoy the site!
+            This site is a collection of the projects, experiments, startups, and ideas I've brought to life along the way. It's only a snapshot of who I am—but hopefully it gives you a sense of how I think, what I enjoy creating, and why I love building software.
           </p>
         </div>
       </div>
@@ -47,7 +71,7 @@
     <img [src]="profileImage" class="img-styles" alt="Kevin Bacon profile photo" />
     <div class="job-title flex flex-col items-center">
       <span class="quaternary-accent-color">return </span>
-      <app-typewriter-text text="Full Stack Software Engineer"></app-typewriter-text>
+      <app-typewriter-text text="Senior Full Stack Software Engineer"></app-typewriter-text>
     </div>
   </div>
 </div>

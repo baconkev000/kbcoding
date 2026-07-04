@@ -50,6 +50,13 @@ export class ProjectDetailComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.project.game_url);
   }
 
+  get portfolioQueryParams(): { currentType: number } | null {
+    if (!this.project?.project_type) {
+      return null;
+    }
+    return { currentType: this.project.project_type };
+  }
+
   getProjectById(){
     this.apiService.getProjectById(this.projectId).subscribe((project: Project) =>{
       this.project = project;

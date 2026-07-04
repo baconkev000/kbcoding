@@ -9,7 +9,7 @@
                     <a *ngIf="link.url === '#'" href="#">
                         <app-brackets [name]="link.name" [active]="false"></app-brackets>
                     </a>
-                    <a *ngIf="link.url !== '#'" [routerLink]="link.url">
+                    <a *ngIf="link.url !== '#'" [routerLink]="link.url === 'projects' ? ['/projects'] : link.url" [queryParams]="link.url === 'projects' ? {} : null">
                         <app-brackets [name]="link.name" [active]="isActive(link.url)"></app-brackets>
                     </a>
                 </li>

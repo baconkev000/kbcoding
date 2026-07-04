@@ -53,7 +53,19 @@ export const ABOUT_HOBBIES = [
   'bowling',
   'weight_lifting',
   'art',
-  'music_prod',
+  'playing_bass_guitar',
   'coding',
+  'learning',
   '...',
 ];
+
+export const ABOUT_EXPERIENCE = {
+  years: '10+',
+  specialties: [
+    'Full Stack Development',
+    'Product Architecture',
+    'AI Applications',
+    'Web & Mobile',
+    'Startup Engineering',
+  ],
+};

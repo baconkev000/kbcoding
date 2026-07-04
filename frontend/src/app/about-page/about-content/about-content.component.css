@@ -23,6 +23,15 @@
 
 .ap-1,
 .ap-2,
-.ap-3 {
+.ap-3,
+.ap-4 {
   margin-bottom: 1rem;
+}
+
+.experience-block {
+  margin-bottom: 1rem;
+}
+
+.experience-block p {
+  margin-bottom: 0.25rem;
 }
