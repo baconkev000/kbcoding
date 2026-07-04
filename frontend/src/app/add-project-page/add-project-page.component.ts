@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, Validators} from '@angular/forms';
+import { FormBuilder, FormArray } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { ProjectType } from '../types/project-type';
-import { Project } from '../types/project';
 import { APIProject } from '../types/api-project';
-import { ProjectMedia } from '../types/project_media';
+import { ProjectMediaUpload } from '../types/project_media';
 
 @Component({
   selector: 'app-add-project-page',
@@ -14,14 +13,21 @@ import { ProjectMedia } from '../types/project_media';
 export class AddProjectPageComponent implements OnInit{
   showProjectInfo: boolean = true;
   showMediaInfo: boolean = false;
-  file: File | null = null;
-  files: FileList | null = null;
+  showGameInfo: boolean = false;
   projectTypes:ProjectType[] = [];
+  selectedMediaIndexes = new Set<number>();
+  displayMode: 'media' | 'web_game' = 'media';
+  gameZipFile: File | null = null;
+
+  projectTags: string[] = [];
+  projectTagInput = '';
+  availableTags: string[] = [];
 
   constructor(private apiService: ApiService, private fb: FormBuilder){}
 
   ngOnInit(){
     this.getprojectTypes();
+    this.loadAvailableTags();
   }
 
   getprojectTypes(){
@@ -31,83 +37,252 @@ export class AddProjectPageComponent implements OnInit{
     })
   }
 
+  loadAvailableTags(): void {
+    this.apiService.getTags().subscribe((tags) => {
+      this.availableTags = tags.map((tag) => tag.name).sort((a, b) => a.localeCompare(b));
+    });
+  }
+
   initMediaForm(){
     return this.fb.group({
-      mediaName: ['', [Validators.required, Validators.minLength(4)]],
-      media: [null as File | null, Validators.required]
+      mediaName: [''],
+      media: [null as File | null]
     })
   }
 
   projectForm = this.fb.group({
-    projectName: ['', [Validators.required, Validators.minLength(4)]],
-    projectDescription: ['', [Validators.required, Validators.minLength(4)]],
-    projectOverview: ['', [Validators.required, Validators.minLength(4)]],
-    projectType:[1, Validators.required],
-    media: this.fb.array([
-      this.initMediaForm()
-    ])
+    projectName: [''],
+    projectRole: [''],
+    projectPlatform: [''],
+    projectUrl: [''],
+    githubUrl: [''],
+    projectDescription: [''],
+    projectOverview: [''],
+    projectType:[null as number | null],
+    media: this.fb.array([])
   });
+
+  techTags: string[] = [];
+  techInput = '';
+
+  private getSelectedProjectType(): ProjectType | undefined {
+    const typeId = this.projectForm.get('projectType')?.value;
+    return this.projectTypes.find((type) => type.id === typeId);
+  }
+
+  get isBuildsProject(): boolean {
+    return this.getSelectedProjectType()?.name === 'Builds';
+  }
+
+  get isCreativeProject(): boolean {
+    return this.getSelectedProjectType()?.name === 'Creative';
+  }
+
+  get isLifeProject(): boolean {
+    return this.getSelectedProjectType()?.name === 'Life / Other';
+  }
+
+  get showProjectUrlField(): boolean {
+    return this.isBuildsProject;
+  }
+
+  get showGithubUrlField(): boolean {
+    return this.isBuildsProject;
+  }
+
+  get showPlatformTechFields(): boolean {
+    return this.isBuildsProject;
+  }
+
+  get isWebGameMode(): boolean {
+    return this.isBuildsProject && this.displayMode === 'web_game';
+  }
+
+  get isMediaMode(): boolean {
+    return !this.isBuildsProject || this.displayMode === 'media';
+  }
+
+  onProjectTypeChange(): void {
+    if (!this.isBuildsProject) {
+      this.projectForm.patchValue({ projectRole: '', projectUrl: '', githubUrl: '', projectPlatform: '' });
+      this.techTags = [];
+      this.techInput = '';
+      this.displayMode = 'media';
+      this.gameZipFile = null;
+    }
+  }
+
+  onDisplayModeChange(mode: 'media' | 'web_game'): void {
+    this.displayMode = mode;
+    if (mode === 'web_game') {
+      this.media.clear();
+      this.selectedMediaIndexes.clear();
+      this.showProjectInfo = false;
+      this.showMediaInfo = false;
+      this.showGameInfo = true;
+    } else {
+      this.gameZipFile = null;
+      this.showGameInfo = false;
+    }
+  }
+
+  onGameZipSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0] ?? null;
+    if (file && !file.name.toLowerCase().endsWith('.zip')) {
+      console.error('Please select a .zip file.');
+      input.value = '';
+      this.gameZipFile = null;
+      return;
+    }
+    this.gameZipFile = file;
+  }
+
+  addProjectTag(): void {
+    const tag = this.projectTagInput.trim();
+    if (!tag || this.projectTags.includes(tag)) {
+      this.projectTagInput = '';
+      return;
+    }
+    this.projectTags = [...this.projectTags, tag];
+    if (!this.availableTags.includes(tag)) {
+      this.availableTags = [...this.availableTags, tag].sort((a, b) => a.localeCompare(b));
+    }
+    this.projectTagInput = '';
+  }
+
+  removeProjectTag(tag: string): void {
+    this.projectTags = this.projectTags.filter((item) => item !== tag);
+  }
+
+  onProjectTagInputKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addProjectTag();
+    }
+  }
+
+  addTechTag(): void {
+    const tag = this.techInput.trim();
+    if (!tag || this.techTags.includes(tag)) {
+      this.techInput = '';
+      return;
+    }
+    this.techTags = [...this.techTags, tag];
+    this.techInput = '';
+  }
+
+  removeTechTag(tag: string): void {
+    this.techTags = this.techTags.filter((item) => item !== tag);
+  }
+
+  onTechInputKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addTechTag();
+    }
+  }
 
   get media(): FormArray {
     return this.projectForm.get('media') as FormArray;
   }
 
-  addMedia(){
-    this.media.push(
-      this.initMediaForm()
-    );
+  onBulkFilesSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) return;
+
+    Array.from(input.files).forEach((file) => {
+      this.media.push(this.fb.group({
+        mediaName: [file.name.replace(/\.[^/.]+$/, '')],
+        media: [file]
+      }));
+    });
+
+    input.value = '';
   }
 
-  removeMedia(mediaId:number){
-    this.media.removeAt(mediaId);
+  toggleMediaSelection(index: number, checked: boolean) {
+    if (checked) {
+      this.selectedMediaIndexes.add(index);
+    } else {
+      this.selectedMediaIndexes.delete(index);
+    }
+  }
+
+  deleteSelectedMedia() {
+    Array.from(this.selectedMediaIndexes)
+      .sort((a, b) => b - a)
+      .forEach((index) => this.media.removeAt(index));
+    this.selectedMediaIndexes.clear();
   }
 
   toggleInfoToShow(info: string):void {
     if(info === "project"){
       this.showProjectInfo = true;
       this.showMediaInfo = false;
+      this.showGameInfo = false;
     }else if(info === "media"){
       this.showProjectInfo = false;
       this.showMediaInfo = true;
+      this.showGameInfo = false;
+    }else if(info === "game"){
+      this.showProjectInfo = false;
+      this.showMediaInfo = false;
+      this.showGameInfo = true;
     }
   }
 
-  onFileSelected(event: Event, index: number) {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.length) {
-      this.media.at(index).patchValue({ media: input.files[0] });
-    }
-  }
-
-  
   onSubmit() {
     try {
-        if (this.projectForm.invalid) {
-            alert("Please fill out all required fields");
-            return;
-        } 
+        let valid_media: ProjectMediaUpload[] = [];
 
-        let valid_media: ProjectMedia[] = [];
-
-        if (this.projectForm.value.media) {
-            this.projectForm.value.media.forEach(m => {
+        this.media.controls.forEach((control) => {
+            const mediaName = control.get('mediaName')?.value as string;
+            const mediaFile = control.get('media')?.value as File | null;
+            if (mediaFile) {
                 valid_media.push({
-                    name: m.mediaName!,
-                    url: m.media! as File  // Ensure it's a file
+                    name: mediaName || mediaFile.name,
+                    url: mediaFile,
                 });
-            });
-        }
+            }
+        });
 
         const valid_project: APIProject = {
-            title: this.projectForm.value.projectName!,
-            overview: this.projectForm.value.projectOverview!,
-            description: this.projectForm.value.projectDescription!,
-            media: valid_media,
+            title: this.projectForm.value.projectName || '',
+            overview: this.projectForm.value.projectOverview || '',
+            description: this.projectForm.value.projectDescription || '',
+            media: this.isWebGameMode ? [] : valid_media,
             project_type: this.projectForm.value.projectType!,
+            display_mode: this.isBuildsProject ? this.displayMode : 'media',
         };
 
-        console.log("Valid project", valid_project);
-        console.log("Valid media", valid_media);
+        if (this.projectTags.length) {
+            valid_project.tags = [...this.projectTags];
+        }
+
+        if (this.isWebGameMode) {
+            if (!this.gameZipFile) {
+                console.error('A zip file is required for playable web game projects.');
+                return;
+            }
+            valid_project.game_zip = this.gameZipFile;
+        }
+
+        if (this.isBuildsProject && this.projectForm.value.projectRole) {
+            valid_project.role = this.projectForm.value.projectRole!;
+        }
+        if (this.showProjectUrlField && this.projectForm.value.projectUrl) {
+            valid_project.project_url = this.projectForm.value.projectUrl!;
+        }
+        if (this.showGithubUrlField && this.projectForm.value.githubUrl) {
+            valid_project.github_url = this.projectForm.value.githubUrl!;
+        }
+        if (this.showPlatformTechFields && this.projectForm.value.projectPlatform) {
+            valid_project.platform = this.projectForm.value.projectPlatform!;
+        }
+        if (this.showPlatformTechFields && this.techTags.length) {
+            valid_project.tech = [...this.techTags];
+        }
 
         this.apiService.postProject(valid_project).subscribe({
             next: (res) => console.log("Success:", res),
