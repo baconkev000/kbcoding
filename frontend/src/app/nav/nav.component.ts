@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class NavComponent {
   links = [
     {
-      name: 'Projects',
+      name: 'Portfolio',
       url: 'projects',
     },
     {
