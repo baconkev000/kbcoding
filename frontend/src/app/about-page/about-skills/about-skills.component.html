@@ -1,0 +1,36 @@
+<div class="skills-container font-courier">
+  <app-dev-header name="Technical_Skills"></app-dev-header>
+
+  <div class="skills-accordion">
+    <div class="accordion-item" *ngFor="let section of sections">
+      <button
+        type="button"
+        class="accordion-button"
+        [class.collapsed]="!isExpanded(section.id)"
+        (click)="toggleSection(section.id)"
+      >
+        <app-member-access [members]="['View ' + section.label]"></app-member-access>
+      </button>
+
+      <div class="accordion-body" *ngIf="isExpanded(section.id)">
+        <div class="bar-container grid grid-cols-12 gap-2 items-center" *ngFor="let skill of section.skills">
+          <div class="bar-text-container col-span-12 md:col-span-4 flex items-center justify-center">
+            <span class="bar-text"><strong>{{ skill.name }}</strong></span>
+          </div>
+          <div class="bar-fill-container col-span-10 md:col-span-7">
+            <div
+              class="bar-fill"
+              [class.bar-fill-animate]="shouldAnimate(section.id)"
+              [style.width.%]="shouldAnimate(section.id) ? skill.percent : 0"
+            >
+              <span class="invisible-placeholder">IP</span>
+            </div>
+          </div>
+          <div class="col-span-2 md:col-span-1 percent-num-container">
+            <span class="percent-num"><strong>{{ skill.percent }} %</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,14 @@
         </div>
         <div class="flex justify-center flex-col">
             <ul class="flex animate-fade-down ease-in-out duration-200">
-                <li class="px-4 hover:text-l-grey" *ngFor="let link of links"><a [routerLink]="link.url">{{link.name}}</a></li>
+                <li class="px-4 hover:text-l-grey" *ngFor="let link of links">
+                    <a *ngIf="link.url === '#'" href="#">
+                        <app-brackets [name]="link.name" [active]="false"></app-brackets>
+                    </a>
+                    <a *ngIf="link.url !== '#'" [routerLink]="link.url">
+                        <app-brackets [name]="link.name" [active]="isActive(link.url)"></app-brackets>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

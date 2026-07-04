@@ -1,0 +1,88 @@
+.skills-container {
+  color: #eed17a;
+  margin-top: 2rem;
+}
+
+.bar-container {
+  width: 100%;
+  border: #494f54 solid 1px;
+  height: auto;
+  padding: 5px 0 5px 5px;
+  margin-bottom: 5px;
+}
+
+.bar-fill-container {
+  background-color: transparent;
+  padding: 0;
+}
+
+.bar-fill {
+  background-color: #7de3a8;
+  height: 100%;
+  padding: 3px 0;
+  width: 0;
+}
+
+.bar-fill-animate {
+  transition: width 0.5s ease;
+}
+
+.bar-text-container {
+  background-color: #161616;
+  border: 2px solid #262626;
+  font-size: 1em;
+}
+
+.bar-text {
+  color: #eed17a;
+}
+
+.invisible-placeholder {
+  visibility: hidden;
+}
+
+.accordion-item {
+  background-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.accordion-button {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.accordion-button.collapsed {
+  background-color: #2c2c2c;
+  color: #c895e8;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #846894;
+  color: white;
+  font-weight: bold;
+}
+
+.accordion-body {
+  padding: 1rem 0.5rem;
+}
+
+.percent-num {
+  color: #7de3a8;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 1200px) {
+  .percent-num,
+  .bar-text {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 992px) {
+  .percent-num-container {
+    display: none;
+  }
+}

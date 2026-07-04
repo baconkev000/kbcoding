@@ -1,0 +1,7 @@
+<span class="member-access-text">
+  <ng-container *ngFor="let token of memberTokens">
+    <span [ngClass]="token.colorClass">{{ token.word }}</span>
+    <span *ngIf="token.showDot" class="dot">.</span>
+    <app-code-parens *ngIf="token.showParens" [func]="false"></app-code-parens>
+  </ng-container>
+</span>

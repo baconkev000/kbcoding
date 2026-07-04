@@ -1,0 +1,9 @@
+.member-access-text {
+  display: inline;
+}
+
+@media (max-width: 1200px) {
+  .member-access-text {
+    font-size: 0.8em;
+  }
+}

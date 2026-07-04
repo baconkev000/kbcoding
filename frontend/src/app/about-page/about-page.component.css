@@ -1,0 +1,11 @@
+.about-page-body {
+  border: solid #323232 1px;
+  padding: 2em;
+  min-height: 80vh;
+}
+
+@media (max-width: 768px) {
+  .about-page-body {
+    padding: 1.25em;
+  }
+}

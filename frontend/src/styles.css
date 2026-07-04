@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-courier {
+  font-family: Courier, 'Courier New', monospace;
+}
+
+.accent-color {
+  color: #f3e98b;
+}
+
+.secondary-accent-color {
+  color: #deb8f6;
+}
+
+.tertiary-accent-color {
+  color: rgb(184, 246, 237);
+}
+
+.quaternary-accent-color {
+  color: rgb(124, 164, 117);
+}
+
+.quinary-accent-color {
+  color: #b8d8f6;
+}
+
+.senary-accent-color {
+  color: #eed17a;
+}
+
+.septenary-accent-color {
+  color: #7de3a8;
+}
+
+.add-indent {
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.code-line {
+  border-left: 1px solid rgb(225, 225, 225, 0.5);
+}
+
+.dot {
+  color: white;
+}
+
+.dev-header {
+  text-align: left;
+  color: white;
+  font-size: 1.5em;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 1200px) {
+  .dev-header {
+    font-size: 1.3em;
+  }
+}

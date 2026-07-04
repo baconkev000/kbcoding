@@ -14,6 +14,14 @@ import { AddProjectPageComponent } from './add-project-page/add-project-page.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { httpInterceptorProviders } from './http-interceptors';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { AboutContentComponent } from './about-page/about-content/about-content.component';
+import { AboutSkillsComponent } from './about-page/about-skills/about-skills.component';
+import { BracketsComponent } from './components/brackets/brackets.component';
+import { MemberAccessComponent } from './components/member-access/member-access.component';
+import { CodeParensComponent } from './components/code-parens/code-parens.component';
+import { DevHeaderComponent } from './components/dev-header/dev-header.component';
+import { TypewriterTextComponent } from './components/typewriter-text/typewriter-text.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +34,14 @@ import { httpInterceptorProviders } from './http-interceptors';
     ProjectTypeHoverDirective,
     AddProjectPageComponent,
     ProjectDetailComponent,
+    AboutPageComponent,
+    AboutContentComponent,
+    AboutSkillsComponent,
+    BracketsComponent,
+    MemberAccessComponent,
+    CodeParensComponent,
+    DevHeaderComponent,
+    TypewriterTextComponent,
   ],
   imports: [
     BrowserModule,

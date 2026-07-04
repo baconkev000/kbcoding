@@ -1,0 +1,53 @@
+<div class="about-content grid grid-cols-1 lg:grid-cols-12 gap-8 font-courier">
+  <div class="lg:col-span-8">
+    <app-dev-header name="Bio"></app-dev-header>
+
+    <div class="add-indent code-line">
+      <div class="about-sub-title">
+        <span class="secondary-accent-color">name </span>=
+        <span class="accent-color"><strong> Kevin_Bacon</strong></span>
+      </div>
+
+      <div class="about-summary">
+        <div class="add-indent code-line">
+          <p class="ap-1">
+            Hi, my name is Kevin Bacon and I'm a full stack software engineer based in
+            <app-member-access [members]="['Salt Lake City Utah']"></app-member-access>.
+            I regularly create and work on projects where I develop and implement scalable, data driven, high qualty products/features.
+          </p>
+        </div>
+
+        <p>
+          <span class="secondary-accent-color">hobbies </span>=<span class="accent-color"> [</span>
+          <ng-container *ngFor="let hobby of hobbies; let last = last">
+            <span class="tertiary-accent-color">{{ hobby }}</span><span *ngIf="!last">, </span>
+          </ng-container>
+          <span class="accent-color"> ] </span>
+        </p>
+
+        <div class="add-indent code-line">
+          <p class="ap-2">
+            When I'm not working, I am likely executing one of the
+            <span class="secondary-accent-color"> hobbies</span> listed above.
+          </p>
+          <p class="ap-3">
+            <span class="quaternary-accent-color">
+              # I enjoy excersizing my creative side in various ways and I am always wanting to gain skills in anything new. From creating art and animations to producing music, there is no limit to what I belive I can do. I love learning and trying new things. I have a strong drive for perfecting my craft and getting better at everything I do, especially programming.
+            </span>
+          </p>
+          <p>
+            This site is a small representation of who I am and what I enjoy doing. I hope you enjoy the site!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lg:col-span-4 flex flex-col items-center">
+    <img [src]="profileImage" class="img-styles" alt="Kevin Bacon profile photo" />
+    <div class="job-title flex flex-col items-center">
+      <span class="quaternary-accent-color">return </span>
+      <app-typewriter-text text="Full Stack Software Engineer"></app-typewriter-text>
+    </div>
+  </div>
+</div>
