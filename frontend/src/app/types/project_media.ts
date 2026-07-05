@@ -2,9 +2,7 @@ export interface ProjectMedia {
     id?: number,
     name: string,
     url: string,
-}
-
-export interface ProjectMediaUpload {
-    name: string,
-    url: File,
+    poster?: string,
+    thumbnail?: string,
+    is_video?: boolean,
 }

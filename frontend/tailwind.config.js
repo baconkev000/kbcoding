@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{html,ts}","./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ['Georgia', 'Times New Roman', 'Times', 'serif'],
+      },
       colors: {
         'd-grey': '#161616',
         'md-grey': '#222222',

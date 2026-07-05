@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+}
+
 .font-courier {
   font-family: Courier, 'Courier New', monospace;
 }

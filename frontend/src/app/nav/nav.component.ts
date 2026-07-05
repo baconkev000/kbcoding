@@ -11,27 +11,23 @@ export class NavComponent {
     {
       name: 'Portfolio',
       url: 'projects',
+      external: false,
     },
     {
       name: 'About Me',
       url: 'about',
+      external: false,
     },
     {
-      name: 'Add a Project',
-      url: 'add-project',
+      name: 'Resume',
+      url: '/assets/docs/KevinBaconResume.pdf',
+      external: true,
     },
-    {
-      name: 'Login',
-      url: '#',
-    }
   ];
 
   constructor(public router: Router) {}
 
   isActive(url: string): boolean {
-    if (url === '#') {
-      return false;
-    }
     const path = this.router.url.split('?')[0];
     return path === `/${url}` || path.startsWith(`/${url}/`);
   }

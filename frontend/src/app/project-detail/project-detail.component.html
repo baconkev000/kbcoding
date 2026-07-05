@@ -42,17 +42,51 @@
                     <div id="project-carousel" class="relative w-full bg-md-grey rounded-lg overflow-hidden">
                         <div class="relative h-56 md:h-96 flex items-center justify-center">
                             <ng-container *ngIf="currentMedia as media">
-                                <video
-                                    *ngIf="isVideo(mediaUrl(media.url)); else imageSlide"
-                                    class="max-h-full max-w-full object-contain"
-                                    [src]="mediaUrl(media.url)"
-                                    controls
-                                ></video>
+                                <ng-container *ngIf="isVideoMedia(media); else imageSlide">
+                                    <button
+                                        *ngIf="!isCurrentVideoLoaded"
+                                        type="button"
+                                        class="video-play-overlay"
+                                        (click)="loadCurrentVideo()"
+                                        [attr.aria-label]="'Play ' + media.name"
+                                    >
+                                        <img
+                                            *ngIf="posterUrl(media); else videoPosterFallback"
+                                            class="video-poster-image"
+                                            [src]="posterUrl(media)"
+                                            [alt]="media.name + ' poster'"
+                                        />
+                                        <ng-template #videoPosterFallback>
+                                            <div class="video-poster-fallback"></div>
+                                        </ng-template>
+                                        <span class="video-play-button">
+                                            <span *ngIf="!isVideoLoading" class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-black/60">
+                                                <svg class="w-7 h-7 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 12">
+                                                    <path d="M0 0.8C0 0.16 0.7-0.22 1.24 0.12l8.2 5.2a0.8 0.8 0 0 1 0 1.36l-8.2 5.2A0.8 0.8 0 0 1 0 11.2V0.8Z"/>
+                                                </svg>
+                                            </span>
+                                            <span *ngIf="isVideoLoading" class="video-loading-label">Loading...</span>
+                                        </span>
+                                    </button>
+                                    <video
+                                        #mainVideo
+                                        *ngIf="isCurrentVideoLoaded"
+                                        class="max-h-full max-w-full object-contain"
+                                        [src]="activeVideoSrc"
+                                        [poster]="posterUrl(media) || null"
+                                        preload="auto"
+                                        controls
+                                        playsinline
+                                        (canplay)="onVideoCanPlay()"
+                                        (error)="onVideoError()"
+                                    ></video>
+                                </ng-container>
                                 <ng-template #imageSlide>
                                     <img
                                         class="max-h-full max-w-full object-contain"
                                         [src]="mediaUrl(media.url)"
                                         [alt]="media.name"
+                                        decoding="async"
                                     />
                                 </ng-template>
                             </ng-container>
@@ -111,15 +145,25 @@
                             [class.border-a-purple]="currentMediaIndex !== i"
                             (click)="updateCurrentMedia(i)"
                         >
-                            <div *ngIf="isVideo(mediaUrl(media.url)); else imageThumb" class="relative w-full">
-                                <video
-                                    class="h-auto max-w-full rounded-lg pointer-events-none"
-                                    [src]="mediaUrl(media.url) + '#t=0.1'"
-                                    preload="metadata"
-                                    muted
-                                    playsinline
-                                ></video>
-                                <span class="absolute inset-0 flex items-center justify-center">
+                            <div *ngIf="isVideoMedia(media); else imageThumb" class="relative w-full">
+                                <img
+                                    *ngIf="thumbUrl(media); else videoThumbFallback"
+                                    class="h-auto max-w-full rounded-lg"
+                                    [src]="thumbUrl(media)"
+                                    [alt]="media.name + ' thumbnail'"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                                <ng-template #videoThumbFallback>
+                                    <div class="video-thumb-placeholder rounded-lg">
+                                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/50">
+                                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 12">
+                                                <path d="M0 0.8C0 0.16 0.7-0.22 1.24 0.12l8.2 5.2a0.8 0.8 0 0 1 0 1.36l-8.2 5.2A0.8 0.8 0 0 1 0 11.2V0.8Z"/>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                <span *ngIf="thumbUrl(media)" class="absolute inset-0 flex items-center justify-center pointer-events-none">
                                     <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/50">
                                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 12">
                                             <path d="M0 0.8C0 0.16 0.7-0.22 1.24 0.12l8.2 5.2a0.8 0.8 0 0 1 0 1.36l-8.2 5.2A0.8 0.8 0 0 1 0 11.2V0.8Z"/>
@@ -132,6 +176,8 @@
                                     class="h-auto max-w-full rounded-lg"
                                     [src]="mediaUrl(media.url)"
                                     [alt]="media.name"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </ng-template>
                         </button>

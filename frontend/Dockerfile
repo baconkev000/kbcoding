@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM --platform=$BUILDPLATFORM node:17.0.1-bullseye-slim as builder
+FROM --platform=$BUILDPLATFORM node:17.0.1-bullseye-slim AS builder
 
 RUN mkdir /project
 WORKDIR /project
@@ -13,7 +13,7 @@ RUN npm ci
 COPY . .
 CMD ["ng", "serve", "--host", "0.0.0.0"]
 
-FROM builder as dev-envs
+FROM builder AS dev-envs
 
 RUN <<EOF
 apt-get update

@@ -1,0 +1,28 @@
+<div class="terminal-window">
+  <div class="terminal-titlebar">
+    <div class="terminal-titlebar-left">
+      <span class="terminal-title">Command Prompt</span>
+    </div>
+    <div class="terminal-window-controls" aria-hidden="true">
+      <span class="control minimize"></span>
+      <span class="control maximize"></span>
+      <span class="control close"></span>
+    </div>
+  </div>
+
+  <div class="terminal-body">
+    <div
+      class="terminal-line"
+      *ngFor="let line of completedLines"
+      [class.terminal-line-check]="isCheckLine(line)"
+      [class.terminal-line-status]="isStatusLine(line)"
+      [class.terminal-line-success]="isSuccessLine(line)"
+    >
+      {{ line }}
+    </div>
+
+    <div class="terminal-line terminal-line-active">
+      <span>{{ activeLine }}</span><span class="terminal-cursor" *ngIf="showCursor">█</span>
+    </div>
+  </div>
+</div>
